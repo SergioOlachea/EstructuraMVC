@@ -203,140 +203,162 @@ public class Vista {
  	
  	public void registro() {
  		
- 		frame = new JFrame();
- 		frame.setBounds(100, 100, 920, 534);
+ 		JFrame frame = new JFrame("XCOMPANY - Crear cuenta");
+ 		frame.setBounds(100, 100,  640, 700);
  		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 		frame.getContentPane().setLayout(new BorderLayout());
+
+ 		JPanel fondo = new JPanel();
+ 		fondo.setBackground(new Color(255, 165, 0));
+ 		fondo.setLayout(null);
+ 		frame.getContentPane().add(fondo, BorderLayout.CENTER);
+
+ 		JLabel lblEmpresa = new JLabel("XCOMPANY", SwingConstants.CENTER);
+ 		lblEmpresa.setForeground(new Color(0, 77, 64));
+ 		lblEmpresa.setFont(new Font("SansSerif", Font.BOLD, 36));
+ 		lblEmpresa.setBounds(-122, 44, 920, 40);
+ 		fondo.add(lblEmpresa);
+
+ 		JPanel tarjeta = new JPanel();
+ 		tarjeta.setBackground(new Color(0, 77, 64));
+ 		tarjeta.setLayout(null);
+ 		tarjeta.setBounds(64, 94, 520, 542);
+ 		tarjeta.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+ 		fondo.add(tarjeta);
+
+ 		JLabel lblTitulo = new JLabel("Crear cuenta", SwingConstants.CENTER);
+ 		lblTitulo.setForeground(Color.WHITE);
+ 		lblTitulo.setFont(new Font("SansSerif", Font.BOLD, 28));
+ 		lblTitulo.setBounds(0, 20, 520, 40);
+ 		tarjeta.add(lblTitulo);
+
+ 		JTextField txtCorreo = new JTextField();
+ 		txtCorreo.setFont(new Font("SansSerif", Font.PLAIN, 18));
+ 		txtCorreo.setBounds(60, 122, 400, 40);
+ 		txtCorreo.setBorder(BorderFactory.createLineBorder(new Color(128,203,196)));
+ 		txtCorreo.setBackground(new Color(0,77,64));
+ 		txtCorreo.setForeground(new Color(128,203,196));
+ 		txtCorreo.setCaretColor(new Color(128,203,196));
+ 		txtCorreo.setToolTipText("Correo electrónico");
+ 		tarjeta.add(txtCorreo);
+
+ 		JTextField txtNombre = new JTextField();
+ 		txtNombre.setFont(new Font("SansSerif", Font.PLAIN, 18));
+ 		txtNombre.setBounds(60, 193, 400, 40);
+ 		txtNombre.setBorder(BorderFactory.createLineBorder(new Color(128,203,196)));
+ 		txtNombre.setBackground(new Color(0,77,64));
+ 		txtNombre.setForeground(new Color(128,203,196));
+ 		txtNombre.setCaretColor(new Color(128,203,196));
+ 		txtNombre.setToolTipText("Nombre");
+ 		tarjeta.add(txtNombre);
+
+ 		JPasswordField txtContrasena = new JPasswordField();
+ 		txtContrasena.setFont(new Font("SansSerif", Font.PLAIN, 18));
+ 		txtContrasena.setBounds(60, 268, 400, 40);
+ 		txtContrasena.setBorder(BorderFactory.createLineBorder(new Color(128,203,196)));
+ 		txtContrasena.setBackground(new Color(0,77,64));
+ 		txtContrasena.setForeground(new Color(128,203,196));
+ 		txtContrasena.setCaretColor(new Color(128,203,196));
+ 		txtContrasena.setToolTipText("Contraseña");
+ 		tarjeta.add(txtContrasena);
+
+ 		JPasswordField txtConfirmar = new JPasswordField();
+ 		txtConfirmar.setFont(new Font("SansSerif", Font.PLAIN, 18));
+ 		txtConfirmar.setBounds(60, 341, 400, 40);
+ 		txtConfirmar.setBorder(BorderFactory.createLineBorder(new Color(128,203,196)));
+ 		txtConfirmar.setBackground(new Color(0,77,64));
+ 		txtConfirmar.setForeground(new Color(128,203,196));
+ 		txtConfirmar.setCaretColor(new Color(128,203,196));
+ 		txtConfirmar.setToolTipText("Confirmar contraseña");
+ 		tarjeta.add(txtConfirmar);
+
+ 		JCheckBox chkTerminos = new JCheckBox("Acepto términos y condiciones");
+ 		chkTerminos.setBounds(60, 387, 400, 30);
+ 		chkTerminos.setBackground(new Color(0,77,64));
+ 		chkTerminos.setForeground(new Color(225,225,225));
+ 		tarjeta.add(chkTerminos);
+
+ 		JButton btnRegistrar = new JButton("Registrarse");
+ 		btnRegistrar.setFont(new Font("SansSerif", Font.BOLD, 20));
+ 		btnRegistrar.setBackground(new Color(255,165,0));
+ 		btnRegistrar.setForeground(new Color(0,77,64));
+ 		btnRegistrar.setBounds(60, 449, 400, 50);
+ 		btnRegistrar.setFocusPainted(false);
+ 		tarjeta.add(btnRegistrar);
  		
+ 		JLabel lblConfirmarContrasena = new JLabel("Confirmar contraseña", SwingConstants.CENTER);
+ 		lblConfirmarContrasena.setForeground(Color.WHITE);
+ 		lblConfirmarContrasena.setFont(new Font("SansSerif", Font.ITALIC, 19));
+ 		lblConfirmarContrasena.setBounds(10, 302, 520, 40);
+ 		tarjeta.add(lblConfirmarContrasena);
+ 		
+ 		JLabel lblContrasena = new JLabel("contraseña", SwingConstants.CENTER);
+ 		lblContrasena.setForeground(Color.WHITE);
+ 		lblContrasena.setFont(new Font("SansSerif", Font.ITALIC, 19));
+ 		lblContrasena.setBounds(0, 229, 520, 40);
+ 		tarjeta.add(lblContrasena);
+ 		
+ 		JLabel lblNombreUsuario = new JLabel("Nombre Usuario", SwingConstants.CENTER);
+ 		lblNombreUsuario.setForeground(Color.WHITE);
+ 		lblNombreUsuario.setFont(new Font("SansSerif", Font.ITALIC, 19));
+ 		lblNombreUsuario.setBounds(0, 158, 520, 40);
+ 		tarjeta.add(lblNombreUsuario);
+ 		
+ 		JLabel lblCorreoElectronico = new JLabel("Correo Electronico", SwingConstants.CENTER);
+ 		lblCorreoElectronico.setForeground(Color.WHITE);
+ 		lblCorreoElectronico.setFont(new Font("SansSerif", Font.ITALIC, 19));
+ 		lblCorreoElectronico.setBounds(-10, 85, 520, 40);
+ 		tarjeta.add(lblCorreoElectronico);
+
+ 		btnRegistrar.addActionListener(e -> {
+ 		    String correo = txtCorreo.getText();
+ 		    String nombre  = txtNombre.getText();
+ 		    String contrasena  = new String(txtContrasena.getPassword());
+ 		    String confirmar  = new String(txtConfirmar.getPassword());
+
+ 		    if (correo.equals("")) {
+ 		    	txtCorreo.setBorder(BorderFactory.createLineBorder(Color.RED , 2));
+ 		    }else {
+ 		    		txtCorreo.setBorder(BorderFactory.createLineBorder(Color.GREEN,2));
+ 		    	} if (nombre.equals("")) {
+ 		           txtNombre.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+ 		       } else {
+ 		           txtNombre.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
+ 		       }
+
+ 		       if (contrasena.equals("")) {
+ 		           txtContrasena.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+ 		       } else {
+ 		           txtContrasena.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
+ 		       }
+
+ 		       if (!confirmar.equals(contrasena) || confirmar.equals("")) {
+ 		           txtConfirmar.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+ 		       } else {
+ 		           txtConfirmar.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
+ 		       }
+
+ 		       if (correo.equals("") || nombre.equals("") || contrasena.equals("") || confirmar.equals("") || !confirmar.equals(contrasena) || !chkTerminos.isSelected()) {
+ 		           JOptionPane.showMessageDialog(frame,
+ 		               "Faltan datos o son inválidos. No se pudo registrar.",
+ 		               "Error de registro",
+ 		               JOptionPane.ERROR_MESSAGE);
+ 		           return;
+ 		       }
+
+ 		       System.out.println("Correo: " + correo);
+ 		       System.out.println("Nombre: " + nombre);
+ 		       System.out.println("Contraseña: " + contrasena);
+ 		       JOptionPane.showMessageDialog(frame,
+ 		           "Registro exitoso.",
+ 		           "Éxito",
+ 		           JOptionPane.INFORMATION_MESSAGE);
+ 		   });
+
  		frame.setVisible(true);
- 		
- 		JPanel panel = new JPanel();
- 		panel.setBackground(new Color(255, 255, 255));
- 		frame.getContentPane().add(panel, BorderLayout.CENTER);
- 		panel.setLayout(null);
- 		
- 		JLabel lblNewLabel_7 = new JLabel("New label");
- 		lblNewLabel_7.setIcon(new ImageIcon(Vista.class.getResource("/images/logouabcs1.png")));
- 		lblNewLabel_7.setBounds(642, 52, 137, 59);
- 		panel.add(lblNewLabel_7);
- 		
- 		JLabel lblNewLabel = new JLabel("UABCS - DASC\n");
- 		lblNewLabel.setForeground(new Color(0, 0, 0));
- 		lblNewLabel.setFont(new Font("Kefa", Font.PLAIN, 24));
- 		lblNewLabel.setBounds(107, 35, 210, 26);
- 		lblNewLabel.setHorizontalAlignment(JLabel.CENTER);
- 		panel.add(lblNewLabel);
- 		
- 		JLabel lblNewLabel_8 = new JLabel("");
- 		lblNewLabel_8.setBounds(36, 186, 353, 81);
- 		lblNewLabel_8.setBorder(BorderFactory.createTitledBorder("Correo electrónico"));
- 		panel.add(lblNewLabel_8);
- 		
- 		textField = new JTextField();
- 		textField.setBackground(new Color(218, 230, 225));
- 		textField.setBounds(49, 211, 328, 42);
- 		panel.add(textField);
- 		textField.setBorder(new LineBorder(new Color(91, 253, 255), 1, true));
- 		textField.setBorder(null);
- 		textField.setColumns(10);
- 		
- 		passwordField = new JPasswordField();
- 		passwordField.setBackground(new Color(218, 230, 225));
- 		passwordField.setBounds(49, 300, 295, 42);
- 		panel.add(passwordField);
- 		
- 		JButton btnNewButton = new JButton("Registro");
- 		btnNewButton.setBackground(new Color(0, 0, 0));
- 		btnNewButton.setOpaque(true);
- 		btnNewButton.setForeground(new Color(255, 255, 255));
- 		btnNewButton.addActionListener(new ActionListener() {
- 			public void actionPerformed(ActionEvent e) {
- 				
- 				String passText = new String(passwordField.getPassword());
- 				Boolean paso = false, paso2 = false;
- 				
- 				String username = textField.getText();
- 				
- 				if( passText.equals("") ) {
- 					
- 					passwordField.setBorder(BorderFactory.createLineBorder(Color.red,2));
- 					
- 				}else {
- 					
- 					passwordField.setBorder(BorderFactory.createLineBorder(Color.green,2));
- 					paso = true;
- 				}
- 				
- 				
- 				if(textField.getText().equals("")) {
- 					textField.setBorder(BorderFactory.createLineBorder(Color.red,2));
- 				}else {
- 					
- 					textField.setBorder(BorderFactory.createLineBorder(Color.green,2));
- 					paso2 = true;
- 				}
- 				
- 				if(paso && paso2) {
- 					
- 					
- 					boolean user_auth = funciones.access(username,passText); 
- 					 
- 					if(user_auth) {
- 						
- 						JOptionPane.showMessageDialog(frame, "Bienvenido.");
- 						
- 					}else {
- 						JOptionPane.showMessageDialog(frame, "Error al acceder","verifique su información",JOptionPane.WARNING_MESSAGE);
- 					}
- 					 
- 					
- 					
- 				}
- 				
- 			}
- 		});
- 		btnNewButton.setBounds(36, 413, 341, 37);
- 		panel.add(btnNewButton);
- 		
- 		JLabel lblNewLabel_1 = new JLabel("Sabiduría como meta, patria como destino ");
- 		lblNewLabel_1.setBounds(69, 73, 308, 16);
- 		lblNewLabel_1.setHorizontalAlignment(JLabel.CENTER);
- 		panel.add(lblNewLabel_1);
- 		
- 		JLabel lblNewLabel_6 = new JLabel("");
- 		lblNewLabel_6.setIcon(new ImageIcon(Vista.class.getResource("/images/redd-francisco-9o8YdYGTT64-unsplash.jpg")));
- 		lblNewLabel_6.setBounds(531, 6, 383, 494);
- 		lblNewLabel_6.setBorder(BorderFactory.createLineBorder(Color.white,5,true));
- 		panel.add(lblNewLabel_6);
- 		
- 		JLabel lblNewLabel_2_1 = new JLabel("Ingresa al panel administrador");
- 		lblNewLabel_2_1.setForeground(Color.BLACK);
- 		lblNewLabel_2_1.setFont(new Font("Lucida Grande", Font.PLAIN, 21));
- 		lblNewLabel_2_1.setBounds(49, 109, 340, 39);
- 		lblNewLabel_2_1.setHorizontalAlignment(JLabel.CENTER);
- 		panel.add(lblNewLabel_2_1);
- 		
- 		JLabel lblNewLabel_8_1 = new JLabel("");
- 		lblNewLabel_8_1.setBorder(BorderFactory.createTitledBorder("Contraseña"));
- 		lblNewLabel_8_1.setBounds(36, 279, 353, 81);
- 		panel.add(lblNewLabel_8_1);
- 		
- 		JLabel lblNewLabel_2 = new JLabel("");
- 		lblNewLabel_2.setIcon(new ImageIcon(Vista.class.getResource("/images/hidden.png")));
- 		lblNewLabel_2.setBounds(351, 315, 24, 16);
- 		panel.add(lblNewLabel_2);
- 		
- 		JCheckBox chckbxNewCheckBox = new JCheckBox("Recordar contraseña");
- 		chckbxNewCheckBox.setBounds(36, 372, 180, 23);
- 		panel.add(chckbxNewCheckBox);
- 		
- 		JLabel lblNewLabel_3 = new JLabel("¿Aún no tienes cuenta?");
- 		lblNewLabel_3.setBounds(225, 462, 152, 16);
- 		panel.add(lblNewLabel_3);
- 		
- 		frame.add(panel);
- 		frame.repaint();
- 		panel.repaint();
- 	}
+
+	}
+ 	
  	public void manager(String target) {
 		  frame.dispose();
 		  if(target.equals("registro")) {
