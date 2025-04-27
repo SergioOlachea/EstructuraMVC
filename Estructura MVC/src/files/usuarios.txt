@@ -1,0 +1,13 @@
+Ana Martínez,ana.martinez@empresa.com,Ana1234!,Admin
+Luis Rodríguez,luis.r@empresa.com,Lu1sR0ck$,Empleado
+María González,maria.g@empresa.com,M@ri4Pass,Empleado
+Carlos Fernández,carlos.f@empresa.com,CarL0s!23,Admin
+Laura Ramírez,laura.r@empresa.com	L@ur4_321,Empleado
+Javier Torres,j.torres@empresa.com,JavTor#56,Empleado
+Patricia Sánchez,pat.sanchez@empresa.com,Pat!S4fE,Admin
+Andrés Herrera,andres.h@empresa.com,Andr3s_789,Empleado
+Sofía López,sofia.l@empresa.com,Sofi@2025,Empleado
+Diego Castro,diego.c@empresa.com,Di3g0!pass,Admin
+sergio,sergio394@gamil.com,1236,administrador
+hola,hola23@gmail.com,hola14,trabajador
+carolina,sol14@gmail.com,sol12,administrador

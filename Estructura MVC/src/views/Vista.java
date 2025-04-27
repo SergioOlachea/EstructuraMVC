@@ -29,6 +29,7 @@ public class Vista {
  	private JPasswordField passwordField;
  	private Modelo funciones;
  	 int c=0;
+ 	String rol = "";
  
  	public Vista() {
  		
@@ -139,6 +140,7 @@ public class Vista {
 					if(user_auth) {
 						
 						JOptionPane.showMessageDialog(frame, "Bienvenido.");
+						
 						
 					}else {
 						JOptionPane.showMessageDialog(frame, "Verifique usuario y contraseña","Datos incorrectos",JOptionPane.WARNING_MESSAGE);
@@ -304,6 +306,39 @@ public class Vista {
  		lblNombreUsuario.setBounds(0, 158, 520, 40);
  		tarjeta.add(lblNombreUsuario);
  		
+ 		JCheckBox chkAdmin = new JCheckBox("Administrador");
+         chkAdmin.setForeground(new Color(225, 225, 225));
+         chkAdmin.setBackground(new Color(0, 77, 64));
+         chkAdmin.setBounds(60, 419, 150, 30);
+         tarjeta.add(chkAdmin);
+
+         JCheckBox chkTrab = new JCheckBox("Estudiante");
+         chkTrab.setForeground(new Color(225, 225, 225));
+         chkTrab.setBackground(new Color(0, 77, 64));
+         chkTrab.setBounds(233, 419, 150, 30);
+         tarjeta.add(chkTrab);
+
+         
+         
+
+         chkAdmin.addActionListener(ev -> {
+             if (chkAdmin.isSelected()) {
+                 chkTrab.setSelected(false);
+                 rol = "administrador";
+             } else {
+                 rol = "";
+             }
+         });
+
+         chkTrab.addActionListener(ev -> {
+             if (chkTrab.isSelected()) {
+                 chkAdmin.setSelected(false);
+                 rol= "estudiante";
+             } else {
+                 rol = "";
+             }
+         });
+ 		
  		JLabel lblCorreoElectronico = new JLabel("Correo Electronico", SwingConstants.CENTER);
  		lblCorreoElectronico.setForeground(Color.WHITE);
  		lblCorreoElectronico.setFont(new Font("SansSerif", Font.ITALIC, 19));
@@ -353,6 +388,8 @@ public class Vista {
  		           "Registro exitoso.",
  		           "Éxito",
  		           JOptionPane.INFORMATION_MESSAGE);
+ 		       funciones.agregarUsuario(nombre, correo, contrasena, rol);
+ 		       manager("Login");
  		   });
 
  		frame.setVisible(true);

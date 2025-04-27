@@ -1,5 +1,11 @@
 package models;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.net.URL;
+
 public class Modelo {
  
  	public Modelo() {
@@ -8,18 +14,24 @@ public class Modelo {
  	
  	public boolean access(String u, String p){
  		
- 		if(u.equals("smariano@mail.com")|| u.equals("sergio") ) {
- 			if(p.equals("232425")) {
- 				
- 				return true; 
- 				
- 			}else {
- 				return false;
- 				
- 			}
- 		}else {
- 			return false; 
- 		}
- 		 
+		try { 
+			FileReader fr = new FileReader("src/files/usuarios.txt");
+			BufferedReader br = new BufferedReader(fr);
+ 			
+ 			String line;
+             while ((line = br.readLine()) != null) {
+            	 String[] parts = line.split(",");              
+            	 if(u.equals(parts[0])) {
+            		return true; 
+            	 }
+              } 
+		    br.close();
+		    return false;
+
+		} catch (Exception e) {
+		    e.printStackTrace();
+		    System.out.println("error");
+		}
+		return false;
  	}
  }
