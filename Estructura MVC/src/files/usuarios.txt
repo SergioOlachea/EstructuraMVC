@@ -9,5 +9,5 @@ Andrés Herrera,andres.h@empresa.com,Andr3s_789,Empleado
 Sofía López,sofia.l@empresa.com,Sofi@2025,Empleado
 Diego Castro,diego.c@empresa.com,Di3g0!pass,Admin
 sergio,sergio394@gamil.com,1236,administrador
-hola,hola23@gmail.com,hola14,trabajador
-carolina,sol14@gmail.com,sol12,administrador
+
+sergioolachea,yeyinmaryor,smriano124@gmail.com,Sergio123.,yeyin,gerente

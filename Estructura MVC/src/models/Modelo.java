@@ -32,6 +32,23 @@ public class Modelo {
 		    e.printStackTrace();
 		    System.out.println("error");
 		}
+
 		return false;
  	}
+ 	
+ 	public static void agregarUsuario(String nombre,String apellido,String empresa, String correo, String nombreusuario, String pass, String rol) {
+        try {
+           
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src/files/usuarios.txt", true));
+
+            writer.write(nombre + apellido + ","+  nombreusuario + "," + correo + "," + pass +  "," + empresa +"," + rol);
+            writer.newLine(); 
+            writer.close();
+
+            System.out.println("Usuario guardado correctamente.");
+
+        } catch (Exception e) {
+            System.err.print("Error al escribir en el archivo: " + e.getMessage());
+        }
+    }
  }
