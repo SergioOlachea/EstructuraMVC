@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import controllers.HomeController;
 import models.Modelo;
 
 public class Vista {
@@ -142,7 +143,9 @@ public class Vista {
 					if(user_auth) {
 						
 						JOptionPane.showMessageDialog(frame, "Bienvenido.");
-						
+						frame.dispose();
+						HomeController hc =new HomeController();
+						hc.home();
 						
 					}else {
 						JOptionPane.showMessageDialog(frame, "Verifique usuario y contraseña","Datos incorrectos",JOptionPane.WARNING_MESSAGE);
