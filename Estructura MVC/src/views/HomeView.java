@@ -2,6 +2,7 @@ package views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -19,9 +20,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
+import controllers.productController;
+
 public class HomeView {
 
 	JFrame ventana;
+	public productView tabla;
 	public HomeView() {
 		// TODO Auto-generated constructor stub
 	}
@@ -116,6 +120,13 @@ public class HomeView {
 	    ventana.add(navegacion, BorderLayout.WEST);
 	    
 	    JPanel contentPanel = new JPanel();
+	    JButton btnTabla =new JButton ("Ver Tabla");
+	    btnTabla.addActionListener(e->{
+	    	ventana.dispose();
+	    	productController v = new productController();
+	    	v.products();
+	    });
+	    contentPanel.add(btnTabla , BorderLayout.CENTER);
 	    contentPanel.setBackground(Color.WHITE);
 	    ventana.add(contentPanel, BorderLayout.CENTER);
 

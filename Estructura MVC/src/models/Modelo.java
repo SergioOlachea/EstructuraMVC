@@ -21,7 +21,7 @@ public class Modelo {
  			String line;
              while ((line = br.readLine()) != null) {
             	 String[] parts = line.split(",");              
-            	 if(u.equals(parts[0])) {
+            	 if(u.equals(parts[0])&&p.equals(parts[2])) {
             		return true; 
             	 }
               } 
