@@ -2,6 +2,7 @@ package models;
 
 
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
 
@@ -22,38 +23,77 @@ public productModel() {
  		
  	}
  	
- 	public JSONArray get()
- 	{
- 		
- 		JSONParser jsonParser = new JSONParser();
- 		
+public JSONArray get() {
+    JSONParser jsonParser = new JSONParser();
+
+    try {
+        Object obj = jsonParser.parse(new FileReader("src/files/productos.json"));
+        JSONArray productList = (JSONArray) obj;
+
+        productList.forEach(emp -> parseTestData((JSONObject) emp));
+        return productList;
+
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    } catch (IOException e) {
+        e.printStackTrace();
+    } catch (ParseException e) {
+        e.printStackTrace();
+    }
+
+    return new JSONArray(); // Retornar array vacío en caso de error
+}
+ 	
+ 	public boolean addProduct(String id,String n,String s,String p)
+	{
+		
+		JSONArray productList = get();
+		JSONObject jsonObject = new JSONObject();
+		
+		String url = "src/files/productos.json";
+		
+		
+		jsonObject.put("id", id);
+		jsonObject.put("nombre", n);
+		jsonObject.put("stock", s);
+		jsonObject.put("precio", p);
+		
+		productList.add(jsonObject);
+		
+		try (FileWriter file = new FileWriter(url)) {
+            file.write(productList.toString()); // Use toString(2) for pretty printing
+            file.flush();
+            file.close();
+            System.out.println("JSON array written to file successfully!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		
+		return false;
+	}
+ 	
+ 	public void remove()
+	{
+		
+		JSONArray productList = get();
+		
+		JSONParser jsonParser = new JSONParser();
+		String url = "src/files/productos.json";
+        
+		 productList.remove(0); 
          
-         try 
-         {
-        	 Object obj = jsonParser.parse(new FileReader("src/files/productos.json"));
-        	 JSONObject jsonObject =  (JSONObject) obj;
-   
-             JSONArray productList = (JSONArray) jsonObject.get("productos");
-                          
-            //Iterate over  array
-            productList.forEach( emp -> parseTestData( (JSONObject) emp ) );
-            return productList;
-   
-         } catch (FileNotFoundException e) 
-         {
-             e.printStackTrace();
-         } catch (IOException e) 
-         {
-             e.printStackTrace();
-         } catch (ParseException e) 
-         {
+         System.out.println(productList); 
+         
+         // Write the JSON array to a file
+         try (FileWriter file = new FileWriter(url)) {
+             file.write(productList.toString()); // Use toString(2) for pretty printing
+             file.flush();
+             file.close();
+             System.out.println("JSON array written to file successfully!");
+         } catch (IOException e) {
              e.printStackTrace();
          }
- 	
-         
-         return null;
- 		
- 	}
+	}
  	
  	private static void parseTestData(JSONObject product)
      {

@@ -28,6 +28,7 @@ import models.Modelo;
 public class Vista {
  	int y;
  	private JFrame frame;
+ 	private JFrame ventana ;
  	private JTextField textField;
  	private JPasswordField passwordField;
  	private Modelo funciones;
@@ -210,7 +211,7 @@ public class Vista {
  	
 public void registro() {
  		
- 		JFrame ventana = new JFrame("XCOMPANY - Crear cuenta");
+ 		ventana= new JFrame("XCOMPANY - Crear cuenta");
         ventana.setBounds(50, 50, 640, 800);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  		ventana.setVisible(true);
@@ -507,6 +508,7 @@ public void registro() {
  	
  	public void manager(String target) {
 		  frame.dispose();
+		  ventana.dispose();
 		  if(target.equals("registro")) {
 			  registro();
 	  }else if(target.equals("Login")) {
