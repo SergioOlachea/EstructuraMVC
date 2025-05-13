@@ -7,20 +7,26 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -78,45 +84,34 @@ public class productView {
 	 		
 	 		botones.add(Box.createRigidArea(new Dimension(10, 0)));
 	 		
-	 		JButton btnDeleteProduct = new JButton("Eliminar");
-	 		btnDeleteProduct.setPreferredSize(new Dimension(90,50));
-	 		btnDeleteProduct.setAlignmentX(Component.RIGHT_ALIGNMENT);
-	 		btnDeleteProduct.addActionListener(e->{
-	 			((JButton) e.getSource()).getName();
-				
-				System.out.println("Hola: "+((JButton) e.getSource()).getName());
-			
-				productModel pm = new productModel();
-				pm.remove();
-	 		});
-	 		botones.add(btnDeleteProduct);
+	 		
 	 		ventana.getContentPane().add(botones);
 	 		
 	 		int x = 70;
 	 		
-	 		// Creacion de Tabla con json
-	 		String columnas[] = {"id","nombre","Precio","Stock"};
+	 		String columnas[] = {"id", "nombre", "Precio", "Stock", "Acción"};
 	 		DefaultTableModel modelo = new DefaultTableModel(columnas, 0); 
 	 		JTable Productos = new JTable(modelo);
-	 			
-	 		data.forEach( emp -> {
-		 		JSONObject product = (JSONObject)emp;
-	 			String id = (String) product.get("id");  
-	 			String nombre = (String) product.get("nombre"); 
-	 			String precio = (String) product.get("precio"); 
-	 			String stock = (String) product.get("stock"); 
-	 			
-	 			Object []filas ={id,nombre,precio,stock};
-	 			modelo.addRow(filas);
-	 		}); 
-	 		
+
+	 		// Agregar datos desde la lista JSON
+	 		data.forEach(emp -> {
+	 		    JSONObject product = (JSONObject) emp;
+	 		    String id = (String) product.get("id");
+	 		    String nombre = (String) product.get("nombre");
+	 		    String precio = (String) product.get("precio");
+	 		    String stock = (String) product.get("stock");
+	 		    Object[] fila = {id, nombre, precio, stock, "Eliminar"};
+	 		    modelo.addRow(fila);
+	 		});
+
 	 		Productos.setFont(new Font("Kefa", Font.PLAIN, 17));
-	 		Productos.setRowHeight(20);
+	 		Productos.setRowHeight(25);
+
+	 		Productos.getColumn("Acción").setCellRenderer(new ButtonRenderer());
+	 		Productos.getColumn("Acción").setCellEditor(new ButtonEditor(new JCheckBox(), Productos, data, modelo));
+
 	 		JScrollPane scrollPane = new JScrollPane(Productos);
 	 		ventana.getContentPane().add(scrollPane, BorderLayout.SOUTH);
-	 		
-	 		
-	 		
 	 	}
 		
 	public void add()
@@ -214,4 +209,77 @@ public class productView {
 	 	    System.out.println("Stock: " + stock); 
 	 	    
 	     }
+	 	
+	 	class ButtonEditor extends DefaultCellEditor {
+	 	    protected JButton button;
+	 	    private String label;
+	 	    private boolean isPushed;
+	 	    private JTable table;
+	 	    private List<JSONObject> data; 
+	 	    private DefaultTableModel model;
+
+	 	    public ButtonEditor(JCheckBox checkBox, JTable table, List<JSONObject> data, DefaultTableModel model) {
+	 	        super(checkBox);
+	 	        this.table = table;
+	 	        this.data = data;
+	 	        this.model = model;
+
+	 	        button = new JButton();
+	 	        button.setOpaque(true);
+	 	        button.addActionListener(e -> fireEditingStopped());
+	 	    }
+
+	 	    
+	 	    public Component getTableCellEditorComponent(JTable table, Object value,
+	 	            boolean isSelected, int row, int column) {
+	 	        label = (value == null) ? "Eliminar" : value.toString();
+	 	        button.setText(label);
+	 	        isPushed = true;
+	 	        return button;
+	 	    }
+
+	 	    
+	 	   public Object getCellEditorValue() {
+	 		    if (isPushed) {
+	 		        int selectedRow = table.getSelectedRow();
+	 		        if (selectedRow >= 0) {
+	 		            String id = (String) table.getValueAt(selectedRow, 0);
+
+	 		            int confirm = JOptionPane.showConfirmDialog(null,
+	 		                    "¿Estás seguro de que deseas eliminar este producto?",
+	 		                    "Confirmación", JOptionPane.YES_NO_OPTION);
+
+	 		            if (confirm == JOptionPane.YES_OPTION) {
+	 		                productModel pm = new productModel();
+	 		                pm.remove(id);
+
+	 		                SwingUtilities.invokeLater(() -> {
+	 		                    for (int i = 0; i < data.size(); i++) {
+	 		                        JSONObject obj = data.get(i);
+	 		                        if (obj.get("id").equals(id)) {
+	 		                            data.remove(i);
+	 		                            break;
+	 		                        }
+	 		                    }
+	 		                    model.removeRow(selectedRow);
+	 		                });
+	 		            }
+	 		        }
+	 		    }
+	 		    isPushed = false;
+	 		    return label;
+	 		}
+	 	}
+
+	 	class ButtonRenderer extends JButton implements TableCellRenderer {
+	 	    public ButtonRenderer() {
+	 	        setOpaque(true);
+	 	    }
+
+	 	    public Component getTableCellRendererComponent(JTable table, Object value,
+	 	        boolean isSelected, boolean hasFocus, int row, int column) {
+	 	        setText((value == null) ? "Eliminar" : value.toString());
+	 	        return this;
+	 	    }
+	 	}
 }

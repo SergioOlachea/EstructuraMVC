@@ -72,27 +72,39 @@ public JSONArray get() {
 		return false;
 	}
  	
- 	public void remove()
+ 	public void remove(String id)
 	{
 		
 		JSONArray productList = get();
 		
 		JSONParser jsonParser = new JSONParser();
 		String url = "src/files/productos.json";
-        
-		 productList.remove(0); 
-         
-         System.out.println(productList); 
-         
-         // Write the JSON array to a file
-         try (FileWriter file = new FileWriter(url)) {
-             file.write(productList.toString()); // Use toString(2) for pretty printing
-             file.flush();
-             file.close();
-             System.out.println("JSON array written to file successfully!");
-         } catch (IOException e) {
-             e.printStackTrace();
-         }
+		 JSONObject toRemove = null;
+
+		    for (Object obj : productList) {
+		        JSONObject product = (JSONObject) obj;
+		        String currentId = (String) product.get("id");
+
+		        if (currentId.equals(id)) {
+		            toRemove = product;
+		            break; 
+		        }
+		    }
+
+		    if (toRemove != null) {
+		        productList.remove(toRemove);
+		        System.out.println("Producto eliminado: " + toRemove);
+
+		        try (FileWriter file = new FileWriter(url)) {
+		            file.write(productList.toJSONString()); 
+		            file.flush();
+		            System.out.println("JSON actualizado correctamente.");
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+		    } else {
+		        System.out.println("Producto con ID " + id + " no encontrado.");
+		    }
 	}
  	
  	private static void parseTestData(JSONObject product)
