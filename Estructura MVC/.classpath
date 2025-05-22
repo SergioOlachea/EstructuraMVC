@@ -7,5 +7,6 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/smari/git/EstructuraMVC/Estructura MVC/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="src/files/mysql-connector-j-9.3.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

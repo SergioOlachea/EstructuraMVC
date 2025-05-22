@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
+import controllers.UserController;
 import controllers.productController;
 
 public class HomeView {
@@ -94,7 +95,10 @@ public class HomeView {
 	    btnUsuarios.setForeground(new Color(0, 77, 64));
 	    btnUsuarios.setFont(new Font("SansSerif", Font.BOLD, 16));
 	    btnUsuarios.setBorder(BorderFactory.createLineBorder(Color.WHITE));
-	    btnUsuarios.addActionListener(e -> JOptionPane.showMessageDialog(null, "Ventana de usuarios"));
+	    btnUsuarios.addActionListener(e -> {
+	    	UserController uc= new UserController();
+	    	uc.users();
+	    });
 	    navegacion.add(btnUsuarios);
 	    navegacion.add(Box.createVerticalStrut(10));
 	    
