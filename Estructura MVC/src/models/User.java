@@ -29,4 +29,32 @@ public class User {
 		
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public Date getCreate_at() {
+		return create_at;
+	}
+
+	public Date getUpdate_at() {
+		return update_at;
+	}
+
 }

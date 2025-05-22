@@ -17,5 +17,8 @@ public class UserController {
 			
 			uv.showUsers(users);
 	}
+	public void add() {
+		uv.addUsers();
+	}
 
 }
